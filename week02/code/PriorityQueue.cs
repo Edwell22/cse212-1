@@ -12,7 +12,7 @@
     public void Enqueue(string value, int priority)
     {
         var newNode = new PriorityItem(value, priority);
-        _queue.Add(newNode);
+        _queue.Add(newNode); // Add to the back of the queue
     }
 
     public string Dequeue()
@@ -24,14 +24,18 @@
 
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int index = 1; index < _queue.Count - 1; index++)
+        for (int i = 1; i < _queue.Count; i++)
         {
-            if (_queue[index].Priority >= _queue[highPriorityIndex].Priority)
-                highPriorityIndex = index;
+            if (_queue[i].Priority > _queue[highPriorityIndex].Priority)
+            {
+                highPriorityIndex = i;
+            }
         }
+        //Fixed the loop in the Dequeue method to ensure the correct item with the highest priority is selected.
 
         // Remove and return the item with the highest priority
         var value = _queue[highPriorityIndex].Value;
+        _queue.RemoveAt(highPriorityIndex);
         return value;
     }
 

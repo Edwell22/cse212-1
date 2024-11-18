@@ -1,4 +1,14 @@
-﻿public class SimpleQueue {
+﻿/*
+ * CSE212 
+ * (c) BYU-Idaho
+ * 04-Teach - Problem 1
+ * 
+ * It is a violation of BYU-Idaho Honor Code to post or share this code with others or 
+ * to post it online.  Storage into a personal and private repository (e.g. private
+ * GitHub repository, unshared Google Drive folder) is acceptable.
+ *
+ */
+public class SimpleQueue {
     public static void Run() {
         // Test Cases
 
@@ -54,7 +64,7 @@
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
     private void Enqueue(int value) {
-        _queue.Insert(0, value);
+        _queue.Insert(_queue.Count, value);
     }
 
     /// <summary>
@@ -66,8 +76,8 @@
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
-        var value = _queue[1];
-        _queue.RemoveAt(1);
+        var value = _queue[0];
+        _queue.RemoveAt(0);
         return value;
     }
 }
