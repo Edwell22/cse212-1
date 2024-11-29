@@ -1,6 +1,9 @@
-﻿public class PriorityQueue
+﻿using System; 
+using System.Collections; 
+
+public class PriorityQueue
 {
-    private List<PriorityItem> _queue = new();
+    public List<PriorityItem> _queue = new();
 
     /// <summary>
     /// Add a new value to the queue with an associated priority.  The
@@ -12,7 +15,7 @@
     public void Enqueue(string value, int priority)
     {
         var newNode = new PriorityItem(value, priority);
-        _queue.Add(newNode); // Add to the back of the queue
+        _queue.Add(newNode);
     }
 
     public string Dequeue()
@@ -21,21 +24,26 @@
         {
             throw new InvalidOperationException("The queue is empty.");
         }
-
+        
         // Find the index of the item with the highest priority to remove
         var highPriorityIndex = 0;
-        for (int i = 1; i < _queue.Count; i++)
+        var highPriorityNumber = 0;
+        PriorityItem[] arrayVersion = _queue.ToArray();
+        
+        for (int i= 0; i < arrayVersion.Length; i++)
         {
-            if (_queue[i].Priority > _queue[highPriorityIndex].Priority)
-            {
+            Console.WriteLine(arrayVersion[i].Value);
+            
+        
+            if (arrayVersion[i].Priority > highPriorityNumber) {
+                highPriorityNumber = arrayVersion[i].Priority;
                 highPriorityIndex = i;
             }
+            
         }
-        //Fixed the loop in the Dequeue method to ensure the correct item with the highest priority is selected.
 
         // Remove and return the item with the highest priority
-        var value = _queue[highPriorityIndex].Value;
-        _queue.RemoveAt(highPriorityIndex);
+        var value = arrayVersion[highPriorityIndex].Value;
         return value;
     }
 
@@ -43,9 +51,14 @@
     {
         return $"[{string.Join(", ", _queue)}]";
     }
+
+    public PriorityItem[] MakeArray()
+    {
+        return [];
+    }
 }
 
-internal class PriorityItem
+public class PriorityItem
 {
     internal string Value { get; set; }
     internal int Priority { get; set; }
