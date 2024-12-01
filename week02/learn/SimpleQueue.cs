@@ -1,13 +1,6 @@
-﻿/*
- * CSE212 
- * (c) BYU-Idaho
- * 04-Teach - Problem 1
- * 
- * It is a violation of BYU-Idaho Honor Code to post or share this code with others or 
- * to post it online.  Storage into a personal and private repository (e.g. private
- * GitHub repository, unshared Google Drive folder) is acceptable.
- *
- */
+﻿using System;
+using System.Collections.Generic;
+
 public class SimpleQueue {
     public static void Run() {
         // Test Cases
@@ -20,7 +13,7 @@ public class SimpleQueue {
         queue.Enqueue(100);
         var value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found:
+        // Defect(s) Found: None
 
         Console.WriteLine("------------");
 
@@ -38,7 +31,7 @@ public class SimpleQueue {
         Console.WriteLine(value);
         value = queue.Dequeue();
         Console.WriteLine(value);
-        // Defect(s) Found: 
+        // Defect(s) Found: None
 
         Console.WriteLine("------------");
 
@@ -54,7 +47,7 @@ public class SimpleQueue {
         catch (IndexOutOfRangeException) {
             Console.WriteLine("I got the exception as expected.");
         }
-        // Defect(s) Found: 
+        // Defect(s) Found: None
     }
 
     private readonly List<int> _queue = new();
@@ -64,7 +57,8 @@ public class SimpleQueue {
     /// </summary>
     /// <param name="value">Integer value to add to the queue</param>
     private void Enqueue(int value) {
-        _queue.Insert(_queue.Count, value);
+        // Add the value to the end of the queue
+        _queue.Add(value);
     }
 
     /// <summary>
@@ -72,11 +66,14 @@ public class SimpleQueue {
     /// </summary>
     /// <exception cref="IndexOutOfRangeException">If queue is empty</exception>
     /// <returns>First integer in the queue</returns>
-    private int Dequeue() {
+    private int Dequeue()
+    {
         if (_queue.Count <= 0)
             throw new IndexOutOfRangeException();
 
+        // Retrieve the first element from the queue
         var value = _queue[0];
+        // Remove the first element
         _queue.RemoveAt(0);
         return value;
     }
